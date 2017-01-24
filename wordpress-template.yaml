@@ -44,19 +44,6 @@ objects:
       requests:
         storage: 1Gi
 - apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    creationTimestamp: null
-    labels:
-      name: html
-    name: ${APPLICATION_NAME}-html-pvclaim
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 1Gi
-- apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
@@ -247,9 +234,8 @@ objects:
         securityContext: {}
         terminationGracePeriodSeconds: 30
         volumes:
-        - name: volume-html
-          persistentVolumeClaim:
-            claimName: ${APPLICATION_NAME}-html-pvclaim
+        - emptyDir: {}
+          name: volume-html
         - emptyDir: {}
           name: volume-lock
         - emptyDir: {}
